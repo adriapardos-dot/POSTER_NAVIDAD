@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ningún niño sin juguete · Fundación ITACA · 21 de diciembre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Momo+Signature&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ilustraciones de los juguetes (se reutilizan con <use>) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="t-bear" viewBox="0 0 100 130">
+        <ellipse cx="34" cy="114" rx="13" ry="11" fill="#c9773d"/>
+        <ellipse cx="66" cy="114" rx="13" ry="11" fill="#c9773d"/>
+        <ellipse cx="34" cy="117" rx="7" ry="5.5" fill="#f2c08f"/>
+        <ellipse cx="66" cy="117" rx="7" ry="5.5" fill="#f2c08f"/>
+        <ellipse cx="50" cy="88" rx="26" ry="28" fill="#d88a4a"/>
+        <ellipse cx="50" cy="92" rx="15" ry="17" fill="#f2c08f"/>
+        <ellipse cx="23" cy="82" rx="9" ry="17" fill="#c9773d" transform="rotate(28 23 82)"/>
+        <ellipse cx="77" cy="82" rx="9" ry="17" fill="#c9773d" transform="rotate(-28 77 82)"/>
+        <circle cx="27" cy="16" r="11" fill="#c9773d"/>
+        <circle cx="73" cy="16" r="11" fill="#c9773d"/>
+        <circle cx="27" cy="16" r="5" fill="#f2c08f"/>
+        <circle cx="73" cy="16" r="5" fill="#f2c08f"/>
+        <circle cx="50" cy="37" r="27" fill="#d88a4a"/>
+        <ellipse cx="50" cy="47" rx="12" ry="9" fill="#f2c08f"/>
+        <circle cx="40" cy="32" r="3.5" fill="#10203f"/>
+        <circle cx="60" cy="32" r="3.5" fill="#10203f"/>
+        <ellipse cx="50" cy="43" rx="4.5" ry="3" fill="#10203f"/>
+        <path d="M45 50 Q50 54 55 50" stroke="#10203f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M50 67 L37 60 L37 74Z M50 67 L63 60 L63 74Z" fill="#e63b2e"/>
+        <circle cx="50" cy="67" r="4" fill="#e63b2e"/>
+      </symbol>
+
+      <symbol id="t-ball" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="42" fill="#f6eedd"/>
+        <path d="M50 8 A42 42 0 0 1 92 50 L50 50Z" fill="#e63b2e"/>
+        <path d="M50 92 A42 42 0 0 1 8 50 L50 50Z" fill="#2bb3a3"/>
+        <path d="M8 50 A42 42 0 0 1 50 8 L50 50Z" fill="#f2b134"/>
+        <circle cx="50" cy="50" r="8" fill="#f6eedd"/>
+        <ellipse cx="34" cy="28" rx="8" ry="4" fill="#fff" opacity=".45" transform="rotate(-35 34 28)"/>
+      </symbol>
+
+      <symbol id="t-rocket" viewBox="0 0 100 100">
+        <path d="M50 6 C66 20 70 40 68 66 L32 66 C30 40 34 20 50 6Z" fill="#f6eedd"/>
+        <path d="M50 6 C58 13 63 22 65 30 L35 30 C37 22 42 13 50 6Z" fill="#e63b2e"/>
+        <circle cx="50" cy="45" r="8" fill="#7cc4f0" stroke="#10203f" stroke-width="3"/>
+        <path d="M32 48 L16 72 L32 70Z" fill="#e63b2e"/>
+        <path d="M68 48 L84 72 L68 70Z" fill="#e63b2e"/>
+        <path d="M40 66 L60 66 L56 74 L44 74Z" fill="#10203f"/>
+        <path d="M44 74 Q50 98 56 74Z" fill="#f2b134"/>
+      </symbol>
+
+      <symbol id="t-duck" viewBox="0 0 100 100">
+        <path d="M14 66 L4 48 L24 58Z" fill="#f2b134"/>
+        <ellipse cx="46" cy="68" rx="36" ry="22" fill="#f2b134"/>
+        <circle cx="62" cy="38" r="20" fill="#f2b134"/>
+        <path d="M78 40 L96 45 L80 51Z" fill="#e8742a"/>
+        <circle cx="67" cy="34" r="3.5" fill="#10203f"/>
+        <path d="M28 62 Q44 54 54 70 Q38 78 28 62Z" fill="#e0a020"/>
+      </symbol>
+
+      <symbol id="t-car" viewBox="0 0 100 100">
+        <path d="M8 66 L12 50 L28 47 L39 30 L68 30 L80 47 L91 51 L93 66Z" fill="#2bb3a3"/>
+        <path d="M43 35 L54 35 L54 46 L35 46Z" fill="#7cc4f0"/>
+        <path d="M58 35 L66 35 L75 46 L58 46Z" fill="#7cc4f0"/>
+        <rect x="86" y="53" width="7" height="5" rx="1" fill="#f2b134"/>
+        <circle cx="29" cy="67" r="11" fill="#10203f"/>
+        <circle cx="29" cy="67" r="4.5" fill="#f6eedd"/>
+        <circle cx="72" cy="67" r="11" fill="#10203f"/>
+        <circle cx="72" cy="67" r="4.5" fill="#f6eedd"/>
+      </symbol>
+
+      <symbol id="t-block" viewBox="0 0 100 100">
+        <rect x="10" y="10" width="80" height="80" rx="12" fill="#f28ab2"/>
+        <rect x="21" y="21" width="58" height="58" rx="7" fill="#f6eedd"/>
+        <text x="50" y="70" text-anchor="middle" font-family="'Bricolage Grotesque', 'Arial Black', sans-serif" font-weight="800" font-size="50" fill="#e63b2e">A</text>
+      </symbol>
+
+      <symbol id="logo-itaca" viewBox="0 0 44 44">
+        <circle cx="22" cy="22" r="21" fill="#f6eedd"/>
+        <path d="M21 8 L21 29 L10 29Z" fill="#10203f"/>
+        <path d="M24 12 L24 29 L33 29Z" fill="#e63b2e"/>
+        <path d="M8 32 H36 L31 37 H13Z" fill="#10203f"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main class="stage">
+    <article class="poster" id="poster">
+
+      <div class="glow" id="glow"></div>
+      <canvas class="snow" id="snow" width="848" height="1200"></canvas>
+
+      <!-- Cabecera / branding -->
+      <header class="header">
+        <div class="logo">
+          <svg class="logo-mark" aria-hidden="true"><use href="#logo-itaca"/></svg>
+          <div class="logo-text">
+            <strong>Fundación ITACA</strong>
+            <span>L'Hospitalet</span>
+          </div>
+        </div>
+        <p class="header-right">Campaña de Navidad · 2026</p>
+      </header>
+
+      <!-- Titular -->
+      <h1 class="title" id="title" aria-label="Ningún niño sin juguete">
+        <span class="title-line" aria-hidden="true">Ningún</span>
+        <span class="title-line" aria-hidden="true">niño sin</span>
+        <span class="title-line title-line--accent" aria-hidden="true">juguete</span>
+      </h1>
+
+      <!-- Mensaje de sensibilización -->
+      <section class="message">
+        <p class="kicker">Recogida solidaria de regalos</p>
+        <p class="lead">Este 21 de diciembre, tu donación se convierte en el regalo de un niño o una niña en riesgo de exclusión.</p>
+        <p class="offer" id="offer">Con <b id="price">10 €</b> regalas <b id="gift">un juguete</b>.</p>
+        <p class="hint">↗ Pasa el ratón por los juguetes · clic para donarlos</p>
+      </section>
+
+      <!-- Fecha -->
+      <div class="date">
+        <span class="date-day">21</span>
+        <span class="date-month">de diciembre</span>
+      </div>
+
+      <!-- Caja solidaria (física con Matter.js) -->
+      <div class="box" id="box" aria-hidden="true"></div>
+      <div class="physics" id="physics" aria-hidden="true"></div>
+      <p class="box-label" id="boxLabel">Caja solidaria · <b id="count">0</b> juguetes</p>
+
+      <!-- Capa de partículas (fuego, corazones, humo...) -->
+      <div class="fx" id="fx" aria-hidden="true"></div>
+
+      <!-- Juguetes interactivos -->
+      <div class="toy" data-type="bear" data-gift="un osito de peluche" data-price="12 €" data-depth="1.3" data-rot="-8"
+           style="left:622px;top:118px;width:136px;height:177px" role="button" aria-label="Osito de peluche">
+        <svg viewBox="0 0 100 130" aria-hidden="true">
+          <!-- piernas -->
+          <ellipse cx="34" cy="114" rx="13" ry="11" fill="#c9773d"/>
+          <ellipse cx="66" cy="114" rx="13" ry="11" fill="#c9773d"/>
+          <ellipse cx="34" cy="117" rx="7" ry="5.5" fill="#f2c08f"/>
+          <ellipse cx="66" cy="117" rx="7" ry="5.5" fill="#f2c08f"/>
+          <!-- cuerpo y brazos -->
+          <ellipse cx="50" cy="88" rx="26" ry="28" fill="#d88a4a"/>
+          <ellipse cx="50" cy="92" rx="15" ry="17" fill="#f2c08f"/>
+          <ellipse cx="23" cy="82" rx="9" ry="17" fill="#c9773d" transform="rotate(28 23 82)"/>
+          <ellipse cx="77" cy="82" rx="9" ry="17" fill="#c9773d" transform="rotate(-28 77 82)"/>
+          <!-- cabeza -->
+          <g class="ear ear-l"><circle cx="27" cy="16" r="11" fill="#c9773d"/><circle cx="27" cy="16" r="5" fill="#f2c08f"/></g>
+          <g class="ear ear-r"><circle cx="73" cy="16" r="11" fill="#c9773d"/><circle cx="73" cy="16" r="5" fill="#f2c08f"/></g>
+          <circle cx="50" cy="37" r="27" fill="#d88a4a"/>
+          <ellipse class="cheek" cx="32" cy="45" rx="5" ry="3.5" fill="#f28ab2"/>
+          <ellipse class="cheek" cx="68" cy="45" rx="5" ry="3.5" fill="#f28ab2"/>
+          <ellipse cx="50" cy="47" rx="12" ry="9" fill="#f2c08f"/>
+          <circle cx="40" cy="32" r="3.5" fill="#10203f"/>
+          <circle class="eye-wink" cx="60" cy="32" r="3.5" fill="#10203f"/>
+          <ellipse cx="50" cy="43" rx="4.5" ry="3" fill="#10203f"/>
+          <path class="mouth" d="M45 50 Q50 54 55 50" stroke="#10203f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <g class="bowtie"><path d="M50 67 L37 60 L37 74Z M50 67 L63 60 L63 74Z" fill="#e63b2e"/><circle cx="50" cy="67" r="4" fill="#e63b2e"/></g>
+        </svg>
+      </div>
+      <div class="toy" data-type="block" data-gift="unos bloques" data-price="14 €" data-depth="0.7" data-rot="10"
+           style="left:722px;top:440px;width:84px;height:84px" role="button" aria-label="Bloques de construcción">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <rect class="block-frame" x="10" y="10" width="80" height="80" rx="12" fill="#f28ab2"/>
+          <rect x="21" y="21" width="58" height="58" rx="7" fill="#f6eedd"/>
+          <text class="block-letter" x="50" y="70" text-anchor="middle" font-family="'Bricolage Grotesque', 'Arial Black', sans-serif" font-weight="800" font-size="50" fill="#e63b2e">A</text>
+        </svg>
+      </div>
+      <div class="toy" data-type="rocket" data-gift="un cohete" data-price="15 €" data-depth="1.6" data-rot="18"
+           style="left:500px;top:548px;width:124px;height:124px" role="button" aria-label="Cohete de juguete">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <g class="flame">
+            <path d="M42 72 Q50 116 58 72Z" fill="#e63b2e"/>
+            <path d="M44 74 Q50 104 56 74Z" fill="#f2b134"/>
+            <path d="M47 74 Q50 90 53 74Z" fill="#fff3c4"/>
+          </g>
+          <path d="M50 6 C66 20 70 40 68 66 L32 66 C30 40 34 20 50 6Z" fill="#f6eedd"/>
+          <path d="M50 6 C58 13 63 22 65 30 L35 30 C37 22 42 13 50 6Z" fill="#e63b2e"/>
+          <circle class="window" cx="50" cy="45" r="8" fill="#7cc4f0" stroke="#10203f" stroke-width="3"/>
+          <path d="M32 48 L16 72 L32 70Z" fill="#e63b2e"/>
+          <path d="M68 48 L84 72 L68 70Z" fill="#e63b2e"/>
+          <path d="M40 66 L60 66 L56 74 L44 74Z" fill="#10203f"/>
+        </svg>
+      </div>
+      <div class="toy" data-type="ball" data-gift="una pelota" data-price="8 €" data-depth="1" data-rot="0"
+           style="left:672px;top:596px;width:104px;height:104px" role="button" aria-label="Pelota">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <g class="ball-body">
+            <circle cx="50" cy="50" r="42" fill="#f6eedd"/>
+            <path d="M50 8 A42 42 0 0 1 92 50 L50 50Z" fill="#e63b2e"/>
+            <path d="M50 92 A42 42 0 0 1 8 50 L50 50Z" fill="#2bb3a3"/>
+            <path d="M8 50 A42 42 0 0 1 50 8 L50 50Z" fill="#f2b134"/>
+            <circle cx="50" cy="50" r="8" fill="#f6eedd"/>
+          </g>
+          <ellipse cx="34" cy="28" rx="8" ry="4" fill="#fff" opacity=".45" transform="rotate(-35 34 28)"/>
+        </svg>
+      </div>
+      <div class="toy" data-type="car" data-gift="un cochecito" data-price="10 €" data-depth="0.9" data-rot="-6"
+           style="left:580px;top:720px;width:112px;height:112px" role="button" aria-label="Coche de juguete">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path class="beam" d="M92 50 L130 38 L130 72 L92 60Z" fill="#f2b134"/>
+          <g class="car-body">
+            <path d="M8 66 L12 50 L28 47 L39 30 L68 30 L80 47 L91 51 L93 66Z" fill="#2bb3a3"/>
+            <path d="M43 35 L54 35 L54 46 L35 46Z" fill="#7cc4f0"/>
+            <path d="M58 35 L66 35 L75 46 L58 46Z" fill="#7cc4f0"/>
+            <rect class="headlight" x="86" y="53" width="7" height="5" rx="1" fill="#f2b134"/>
+          </g>
+          <g class="wheel"><circle cx="29" cy="67" r="11" fill="#10203f"/><circle cx="29" cy="67" r="4.5" fill="#f6eedd"/><circle cx="29" cy="59.5" r="1.8" fill="#f6eedd"/></g>
+          <g class="wheel"><circle cx="72" cy="67" r="11" fill="#10203f"/><circle cx="72" cy="67" r="4.5" fill="#f6eedd"/><circle cx="72" cy="59.5" r="1.8" fill="#f6eedd"/></g>
+        </svg>
+      </div>
+      <div class="toy" data-type="duck" data-gift="un patito de goma" data-price="5 €" data-depth="1.2" data-rot="6"
+           style="left:640px;top:300px;width:104px;height:104px" role="button" aria-label="Patito de goma">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <g class="duck-body">
+            <path class="duck-tail" d="M14 66 L4 48 L24 58Z" fill="#f2b134"/>
+            <ellipse cx="46" cy="68" rx="36" ry="22" fill="#f2b134"/>
+            <path class="duck-wing" d="M28 62 Q44 54 54 70 Q38 78 28 62Z" fill="#e0a020"/>
+            <g class="duck-head">
+              <circle cx="62" cy="38" r="20" fill="#f2b134"/>
+              <path class="beak-low" d="M79 45 L95 46 L80 51Z" fill="#c95a1c"/>
+              <path d="M78 39 L96 44 L79 46Z" fill="#e8742a"/>
+              <circle cx="67" cy="34" r="3.5" fill="#10203f"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="tag" id="tag"></div>
+
+      <!-- Pie / entidades -->
+      <footer class="footer">
+        <span class="footer-label">Organiza</span>
+        <svg class="footer-logo" aria-hidden="true"><use href="#logo-itaca"/></svg>
+        <span class="footer-name">Fundación<br>ITACA</span>      </footer>
+    </article>
+  </main>
+
+  <script src="libs/matter.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
