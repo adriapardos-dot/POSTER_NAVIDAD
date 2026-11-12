@@ -82,17 +82,16 @@ body {
 }
 
 .logo { display: flex; align-items: center; gap: 12px; }
-.logo-mark { width: 46px; height: 46px; }
+.logo-mark { width: 56px; height: 56px; }
 .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-.logo-text strong { font-size: 17px; font-weight: 800; letter-spacing: .02em; }
-.logo-text span { font-size: 13px; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+.logo-text strong { font-size: 24px; font-weight: 800; letter-spacing: .02em; }
+.logo-text span { font-size: 17px; opacity: .9; letter-spacing: .08em; text-transform: uppercase; }
 
 .header-right {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .16em;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .1em;
   text-transform: uppercase;
-  opacity: .8;
 }
 
 /* ---------- Titular ---------- */
@@ -122,26 +121,30 @@ body {
 /* ---------- Mensaje ---------- */
 .message {
   position: absolute;
-  top: 586px;
+  top: 582px;
   left: 56px;
-  width: 410px;
+  width: 430px;
   z-index: 2;
 }
 
 .kicker {
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   color: var(--mustard);
-  font-size: 17px;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
 }
 
-.lead { font-size: 20px; line-height: 1.45; }
+.lead { font-size: 29px; font-weight: 600; line-height: 1.25; }
 
 .offer {
   display: block;
   min-height: 2.5em; /* reserva dos líneas para los textos largos */
   margin-top: 14px;
-  font-size: 24px;
-  line-height: 1.25;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
   transform-origin: left center;
 }
 .offer #price { color: var(--mustard); }
@@ -153,16 +156,16 @@ body {
 }
 
 .hint {
-  margin-top: 10px;
-  font-size: 13px;
-  letter-spacing: .06em;
-  opacity: .65;
+  margin-top: 8px;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--sky);
 }
 
 /* ---------- Fecha ---------- */
 .date {
   position: absolute;
-  top: 830px;
+  top: 848px;
   left: 48px;
   z-index: 2;
   display: flex;
@@ -181,7 +184,8 @@ body {
 .date-month {
   margin-top: 4px;
   margin-left: 6px;
-  font-size: 36px;
+  font-size: 44px;
+  font-weight: 800;
 }
 
 /* ---------- Caja solidaria ---------- */
@@ -234,12 +238,13 @@ body {
 
 .box-label {
   position: absolute;
-  top: 1160px;
   left: 472px;
   width: 328px;
   z-index: 3;
+  top: 1156px;
   text-align: center;
-  font-size: 17px;
+  font-size: 24px;
+  font-weight: 700;
 }
 .box-label b { color: var(--mustard); }
 .box-label.is-bump { animation: bump .35s ease; }
@@ -382,11 +387,11 @@ body {
   top: 0;
   left: 0;
   z-index: 30;
-  padding: 9px 16px;
+  padding: 10px 20px;
   border-radius: 999px;
   background: var(--cream);
   color: var(--navy);
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 800;
   white-space: nowrap;
   text-align: center;
@@ -396,7 +401,7 @@ body {
   transition: opacity .2s ease, transform .25s cubic-bezier(.2, .9, .3, 1.3);
   box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
 }
-.tag small { display: block; font-size: 11px; font-weight: 600; opacity: .65; letter-spacing: .06em; }
+.tag small { display: block; font-size: 15px; font-weight: 600; opacity: .8; letter-spacing: .06em; }
 .tag.is-visible { opacity: 1; transform: translate(-50%, -100%) scale(1); }
 .tag.is-below { transform: translate(-50%, 0) scale(.8); }
 .tag.is-below.is-visible { transform: translate(-50%, 0) scale(1); }
@@ -413,17 +418,13 @@ body {
 }
 
 .footer-label {
-  font-size: 14px;
-  opacity: .7;
+  font-size: 18px;
+  opacity: .9;
 }
-.footer-logo { width: 38px; height: 38px; }
-.footer-name { font-size: 15px; line-height: 1.15; }
+.footer-logo { width: 44px; height: 44px; }
+.footer-name { font-size: 20px; font-weight: 800; line-height: 1.1; }
 
 /* Fuente manuscrita para los textos de la parte inferior */
-.message,
-.kicker,
-.offer,
-.hint,
 .date-month,
 .box-label,
 .footer-label,
@@ -433,4 +434,13 @@ body {
   font-stretch: normal;
   letter-spacing: 0;
   text-transform: none;
+}
+
+/* Texto central en Red Hat Text */
+.message,
+.kicker,
+.lead,
+.offer {
+  font-family: 'Red Hat Text', 'Segoe UI', sans-serif;
+  font-stretch: normal;
 }
