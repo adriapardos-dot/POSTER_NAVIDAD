@@ -45,6 +45,8 @@ body {
   transform: scale(var(--s));
   transform-origin: 0 0;
   background:
+    /* Difuminado amarillo fijo en la esquina inferior derecha (mismo color que el brillo del ratón) */
+    radial-gradient(700px circle at 100% 100%, rgba(242, 177, 52, .55), rgba(242, 177, 52, .2) 40%, transparent 75%),
     radial-gradient(900px 600px at 80% 0%, #1b3466 0%, transparent 60%),
     var(--navy);
   color: var(--cream);
@@ -82,7 +84,7 @@ body {
 }
 
 .logo { display: flex; align-items: center; gap: 12px; }
-.logo-mark { width: 56px; height: 56px; }
+.logo-mark { height: 56px; width: auto; max-width: 160px; object-fit: contain; }
 .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
 .logo-text strong { font-size: 24px; font-weight: 800; letter-spacing: .02em; }
 .logo-text span { font-size: 17px; opacity: .9; letter-spacing: .08em; text-transform: uppercase; }
@@ -233,7 +235,8 @@ body {
   will-change: transform;
   transition: opacity .4s ease;
 }
-.phys-toy svg { width: 100%; height: 100%; display: block; }
+.phys-toy svg,
+.phys-toy img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .phys-toy.is-leaving { opacity: 0; }
 
 .box-label {
@@ -256,7 +259,8 @@ body {
   cursor: pointer;
   will-change: transform;
 }
-.toy svg {
+.toy svg,
+.toy .toy-img {
   width: 100%;
   height: 100%;
   display: block;
@@ -270,6 +274,26 @@ body {
 .toy svg circle,
 .toy svg rect,
 .toy svg text { transform-box: fill-box; }
+
+/* Contenedor para juguetes con imagen + piezas animadas (se mueve entero desde JS) */
+.toy .toy-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.toy .toy-art .toy-img {
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+}
+.toy .rocket-flame {
+  position: absolute;
+  left: 40%;
+  top: 82%;
+  width: 20%;
+  height: 50%;
+}
 
 /* --- Cohete: llama --- */
 .toy .flame {
@@ -316,6 +340,13 @@ body {
 .toy.is-active .beak-low { animation: quack .15s ease-in-out infinite alternate; }
 .toy .duck-wing { transform-origin: 15% 40%; }
 .toy.is-active .duck-wing { animation: flap .14s ease-in-out infinite alternate; }
+/* La imagen del patito se balancea con "rotate" para no pisar el movimiento (transform desde JS) */
+.toy .duck-img { object-fit: contain; transform-origin: 50% 100%; }
+.toy.is-active .duck-img { animation: waddle-rotate .3s ease-in-out infinite alternate; }
+@keyframes waddle-rotate {
+  from { rotate: -7deg; }
+  to   { rotate: 7deg; }
+}
 
 @keyframes waddle {
   from { transform: rotate(-7deg); }
@@ -326,6 +357,24 @@ body {
 @keyframes flap { to { transform: rotate(-28deg); } }
 
 /* --- Coche: ruedas, luces y motor --- */
+/* Coche con imagen: el marco tiene la proporción de coche.webp (400×189) para colocar las ruedas */
+.toy .car-beam { position: absolute; inset: 0; }
+.toy .car-frame {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 26.375%;
+  height: 47.25%;
+}
+.toy .car-body { position: absolute; inset: 0; }
+.toy .car-wheel {
+  position: absolute;
+  width: 17.75%;
+  height: 37.57%;
+  display: block;
+}
+.toy .car-wheel--rear  { left: 11.75%; top: 59.26%; }
+.toy .car-wheel--front { left: 70.5%;  top: 59.79%; }
 .toy .wheel { transform-origin: center; }
 .toy.is-active .wheel { animation: spin .3s linear infinite; }
 .toy .beam { opacity: 0; transition: opacity .25s ease; }
@@ -337,6 +386,9 @@ body {
 /* --- Pelota: gira --- */
 .toy .ball-body { transform-origin: center; }
 .toy.is-active .ball-body { animation: spin .45s linear infinite; }
+/* La imagen de la pelota gira con "rotate" para no pisar el bote (transform desde JS) */
+.toy.is-active .ball-img { animation: spin-rotate .45s linear infinite; }
+@keyframes spin-rotate { to { rotate: 360deg; } }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -421,11 +473,12 @@ body {
   font-size: 18px;
   opacity: .9;
 }
-.footer-logo { width: 44px; height: 44px; }
+.footer-logo { height: 44px; width: auto; max-width: 160px; object-fit: contain; }
 .footer-name { font-size: 20px; font-weight: 800; line-height: 1.1; }
 
 /* Fuente manuscrita para los textos de la parte inferior */
 .date-month,
+.header-right,
 .box-label,
 .footer-label,
 .footer-name {

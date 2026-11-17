@@ -139,11 +139,20 @@ function updateLetters() {
    Juguetes flotantes: mouseenter / mouseleave / click
    ---------------------------------------------------------- */
 
+/* Juguetes que usan una imagen en vez del dibujo SVG */
+const TOY_IMAGES = {
+  bear: 'Imagenes/oso_peluche.webp',
+  ball: 'Imagenes/pelota.webp',
+  duck: 'Imagenes/pato.webp',
+  rocket: 'Imagenes/cohete.webp',
+  car: 'Imagenes/coche.webp',
+};
+
 function initToys() {
   poster.querySelectorAll('.toy').forEach((el, i) => {
     const toy = {
       el,
-      svg: el.querySelector('svg'),
+      svg: el.querySelector('.toy-art') || el.querySelector('svg, img'),
       type: el.dataset.type,
       gift: el.dataset.gift,
       price: el.dataset.price,
@@ -232,8 +241,8 @@ function donateToy(toy) {
 
 function dropIntoBox(type) {
   donated += 1;
-  countEl.textContent = donated;
-  bump(boxLabel);
+  if (countEl) countEl.textContent = donated;
+  if (boxLabel) bump(boxLabel);
 
   if (physics) {
     const x = BOX.x + 34 + Math.random() * (BOX.w - 68);
@@ -313,7 +322,7 @@ const TOY_EFFECTS = {
       return { x: rand(-1.5, 1.5) * h, y: -18 * h, rot: 0 };
     },
     frame(toy) {
-      const p = toyPoint(toy, 0.5, 0.86);
+      const p = toyPoint(toy, 0.5, 0.97); // sale de la punta de la llama de la imagen
       const cos = Math.cos(p.angle);
       const sin = Math.sin(p.angle);
       for (let i = 0; i < 3; i += 1) {
@@ -599,7 +608,10 @@ function createPhysics() {
 
     const el = document.createElement('div');
     el.className = 'phys-toy';
-    el.innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#t-${type}"></use></svg>`;
+    const img = TOY_IMAGES[type];
+    el.innerHTML = img
+      ? `<img src="${img}" alt="" draggable="false">`
+      : `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#t-${type}"></use></svg>`;
     layer.appendChild(el);
     items.push({ body, el });
 
