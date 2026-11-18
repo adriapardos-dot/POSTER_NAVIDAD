@@ -239,10 +239,21 @@ function donateToy(toy) {
   }, 1800);
 }
 
+/** Abre la tapa del regalo un momento para que el juguete entre. */
+let giftCloseTimer = 0;
+function openGiftBriefly() {
+  const giftBox = document.getElementById('giftBox');
+  if (!giftBox) return;
+  giftBox.classList.add('is-open');
+  clearTimeout(giftCloseTimer);
+  giftCloseTimer = setTimeout(() => giftBox.classList.remove('is-open'), 1400);
+}
+
 function dropIntoBox(type) {
   donated += 1;
   if (countEl) countEl.textContent = donated;
   if (boxLabel) bump(boxLabel);
+  openGiftBriefly();
 
   if (physics) {
     const x = BOX.x + 34 + Math.random() * (BOX.w - 68);
@@ -658,16 +669,56 @@ function createPhysics() {
    Nieve: el viento sigue al cursor
    ---------------------------------------------------------- */
 
+// Proporción de copos con forma de cristal (el resto son puntos)
+const CRYSTAL_RATIO = 0.18;
+
 function createFlakes(amount) {
   for (let i = 0; i < amount; i += 1) {
+    const crystal = Math.random() < CRYSTAL_RATIO;
     flakes.push({
       x: Math.random() * POSTER_W,
       y: Math.random() * POSTER_H,
-      r: 1 + Math.random() * 2.6,
-      speed: 0.35 + Math.random() * 1.1,
+      r: crystal ? 4.5 + Math.random() * 5 : 1 + Math.random() * 2.6,
+      speed: crystal ? 0.3 + Math.random() * 0.6 : 0.35 + Math.random() * 1.1,
       sway: Math.random() * Math.PI * 2,
+      crystal,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.02,
+      twinkle: Math.random() * Math.PI * 2,
+      twinkleSpeed: 1.5 + Math.random() * 2.5,
     });
   }
+}
+
+// Dibuja un copo de 6 brazos con ramitas
+function drawCrystal(ctx, r) {
+  ctx.beginPath();
+  for (let i = 0; i < 6; i += 1) {
+    const a = (i * Math.PI) / 3;
+    const cos = Math.cos(a);
+    const sin = Math.sin(a);
+    ctx.moveTo(0, 0);
+    ctx.lineTo(cos * r, sin * r);
+    // ramitas a mitad de brazo
+    const bx = cos * r * 0.55;
+    const by = sin * r * 0.55;
+    const b = r * 0.32;
+    ctx.moveTo(bx, by);
+    ctx.lineTo(bx + Math.cos(a + 0.8) * b, by + Math.sin(a + 0.8) * b);
+    ctx.moveTo(bx, by);
+    ctx.lineTo(bx + Math.cos(a - 0.8) * b, by + Math.sin(a - 0.8) * b);
+  }
+  ctx.stroke();
+}
+
+function moveFlake(flake, now) {
+  flake.y += flake.speed;
+  flake.x += wind * Math.min(flake.r, 3) * 0.5 + Math.sin(now / 1000 + flake.sway) * 0.3;
+
+  const m = flake.r + 5;
+  if (flake.y > POSTER_H + m) { flake.y = -m; flake.x = Math.random() * POSTER_W; }
+  if (flake.x > POSTER_W + m) flake.x = -m;
+  if (flake.x < -m) flake.x = POSTER_W + m;
 }
 
 function drawSnow(now) {
@@ -675,22 +726,51 @@ function drawSnow(now) {
   wind += (targetWind - wind) * 0.03;
 
   snowCtx.clearRect(0, 0, POSTER_W, POSTER_H);
+
+  // 1) Puntos de nieve (en un solo trazado)
   snowCtx.fillStyle = 'rgba(246, 238, 221, 0.7)';
   snowCtx.beginPath();
-
   flakes.forEach((flake) => {
-    flake.y += flake.speed;
-    flake.x += wind * flake.r * 0.5 + Math.sin(now / 1000 + flake.sway) * 0.3;
-
-    if (flake.y > POSTER_H + 5) { flake.y = -5; flake.x = Math.random() * POSTER_W; }
-    if (flake.x > POSTER_W + 5) flake.x = -5;
-    if (flake.x < -5) flake.x = POSTER_W + 5;
-
+    if (flake.crystal) return;
+    moveFlake(flake, now);
     snowCtx.moveTo(flake.x + flake.r, flake.y);
     snowCtx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
   });
-
   snowCtx.fill();
+
+  // 2) Copos cristalinos que giran y brillan
+  const t = now / 1000;
+  snowCtx.save();
+  snowCtx.lineCap = 'round';
+  snowCtx.strokeStyle = 'rgb(250, 246, 236)';
+  snowCtx.shadowColor = 'rgba(255, 255, 255, 0.95)';
+  flakes.forEach((flake) => {
+    if (!flake.crystal) return;
+    moveFlake(flake, now);
+    flake.angle += flake.spin;
+
+    // brillo: 0..1, con picos ocasionales más intensos
+    const wave = (Math.sin(t * flake.twinkleSpeed + flake.twinkle) + 1) / 2;
+    const glow = Math.pow(wave, 3);
+
+    snowCtx.globalAlpha = 0.45 + glow * 0.55;
+    snowCtx.shadowBlur = 2 + glow * 12;
+    snowCtx.lineWidth = Math.max(0.8, flake.r * 0.14);
+
+    snowCtx.setTransform(1, 0, 0, 1, 0, 0);
+    snowCtx.translate(flake.x, flake.y);
+    snowCtx.rotate(flake.angle);
+    drawCrystal(snowCtx, flake.r);
+
+    // destello central en el pico de brillo
+    if (glow > 0.5) {
+      snowCtx.fillStyle = `rgba(255, 255, 255, ${(glow - 0.5) * 2})`;
+      snowCtx.beginPath();
+      snowCtx.arc(0, 0, flake.r * 0.22, 0, Math.PI * 2);
+      snowCtx.fill();
+    }
+  });
+  snowCtx.restore();
 }
 
 /* ----------------------------------------------------------

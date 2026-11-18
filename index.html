@@ -128,20 +128,25 @@
         <span class="date-month">de diciembre</span>
       </div>
 
-      <!-- Caja solidaria (física con Matter.js) -->
+      <!-- Caja de regalo solidaria (física con Matter.js) -->
       <div class="box" id="box" aria-hidden="true"></div>
       <div class="physics" id="physics" aria-hidden="true"></div>
+      <!-- Envoltorio del regalo: al pasar el ratón se abre y deja ver los juguetes -->
+      <div class="giftbox" id="giftBox" aria-label="Caja de regalo con los juguetes donados">
+        <div class="giftbox-front"></div>
+        <div class="giftbox-lid"><span class="giftbox-bow"></span></div>
+      </div>
 
       <!-- Capa de partículas (fuego, corazones, humo...) -->
       <div class="fx" id="fx" aria-hidden="true"></div>
 
       <!-- Juguetes interactivos -->
       <div class="toy" data-type="bear" data-gift="un osito de peluche" data-price="12 €" data-depth="1.3" data-rot="-8"
-           style="left:612px;top:118px;width:160px;height:160px" role="button" aria-label="Osito de peluche">
+           style="left:580px;top:96px;width:160px;height:160px" role="button" aria-label="Osito de peluche">
         <img class="toy-img" src="Imagenes/oso_peluche.webp" alt="" draggable="false">
       </div>
       <div class="toy" data-type="block" data-gift="unos bloques" data-price="14 €" data-depth="0.7" data-rot="10"
-           style="left:722px;top:440px;width:84px;height:84px" role="button" aria-label="Bloques de construcción">
+           style="left:748px;top:176px;width:84px;height:84px" role="button" aria-label="Bloques de construcción">
         <svg viewBox="0 0 100 100" aria-hidden="true">
           <rect class="block-frame" x="10" y="10" width="80" height="80" rx="12" fill="#f28ab2"/>
           <rect x="21" y="21" width="58" height="58" rx="7" fill="#f6eedd"/>
@@ -149,7 +154,7 @@
         </svg>
       </div>
       <div class="toy" data-type="rocket" data-gift="un cohete" data-price="15 €" data-depth="1.6" data-rot="18"
-           style="left:500px;top:548px;width:124px;height:124px" role="button" aria-label="Cohete de juguete">
+           style="left:566px;top:452px;width:124px;height:124px" role="button" aria-label="Cohete de juguete">
         <div class="toy-art">
           <!-- Llama animada (queda detrás de la imagen y crece al activar el cohete) -->
           <svg class="rocket-flame" viewBox="40 70 20 50" aria-hidden="true">
@@ -163,11 +168,11 @@
         </div>
       </div>
       <div class="toy" data-type="ball" data-gift="una pelota" data-price="8 €" data-depth="1" data-rot="0"
-           style="left:672px;top:596px;width:104px;height:104px" role="button" aria-label="Pelota">
+           style="left:712px;top:296px;width:104px;height:104px" role="button" aria-label="Pelota">
         <img class="toy-img ball-img" src="Imagenes/pelota.webp" alt="" draggable="false">
       </div>
       <div class="toy" data-type="car" data-gift="un cochecito" data-price="10 €" data-depth="0.9" data-rot="-6"
-           style="left:580px;top:720px;width:112px;height:112px" role="button" aria-label="Coche de juguete">
+           style="left:700px;top:476px;width:112px;height:112px" role="button" aria-label="Coche de juguete">
         <div class="toy-art">
           <!-- Haz de luz de los faros (detrás del coche, se enciende al activarlo) -->
           <svg class="car-beam" viewBox="0 0 100 100" aria-hidden="true">
@@ -183,7 +188,7 @@
         </div>
       </div>
       <div class="toy" data-type="duck" data-gift="un patito de goma" data-price="5 €" data-depth="1.2" data-rot="6"
-           style="left:640px;top:300px;width:104px;height:104px" role="button" aria-label="Patito de goma">
+           style="left:572px;top:300px;width:104px;height:104px" role="button" aria-label="Patito de goma">
         <img class="toy-img duck-img" src="Imagenes/pato.webp" alt="" draggable="false">
       </div>
 
